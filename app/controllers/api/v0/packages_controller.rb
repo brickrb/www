@@ -16,6 +16,15 @@ class Api::V0::PackagesController < ApplicationController
     end
   end
 
+  def show
+    @package = Package.find_by_name(params[:name])
+    if @package
+      render json: @package
+    else
+      render json: { "error": "Package could not be found." }, status: 404
+    end
+  end
+
   private
     def package_params
       params.require(:package).permit(:name)
