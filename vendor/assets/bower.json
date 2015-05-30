@@ -1,0 +1,6 @@
+{
+  "name": "brick",
+  "dependencies": {
+    "primer-css": "*"
+  }
+}
