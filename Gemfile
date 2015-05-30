@@ -10,6 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # Brick Dependencies
+gem 'bootstrap-sass'
 gem 'devise'
 
 # Environment Dependencies
