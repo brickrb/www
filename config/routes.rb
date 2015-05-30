@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # API:
   namespace :api, path: "", :constraints => {:subdomain => "api"}, defaults: {format: 'json'} do
     namespace :v0 do
-      resource :packages
+      get "/packages" => "packages#index"
     end
   end
 
