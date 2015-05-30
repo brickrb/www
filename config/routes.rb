@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api, path: "", :constraints => {:subdomain => "api"}, defaults: {format: 'json'} do
     namespace :v0 do
       get "/packages" => "packages#index"
+      post "/packages" => "packages#create"
     end
   end
 
