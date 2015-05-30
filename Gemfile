@@ -16,7 +16,7 @@ gem 'devise'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  # gem 'coveralls', require: false
+  gem 'coveralls', require: false
   gem 'sqlite3'
   #-----------
   gem 'byebug'
