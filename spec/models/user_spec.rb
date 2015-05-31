@@ -5,5 +5,5 @@ RSpec.describe User, type: :model do
     FactoryGirl.build(:user).should be_valid
   end
 
-  it { should have_many(:ownerships) }
+  it { should have_many(:packages) }
 end

@@ -75,6 +75,7 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
       context "valid package" do
         it "returns http 200" do
           @package = FactoryGirl.create(:package, name: "rails")
+          @ownership = FactoryGirl.create(:ownership)
           get :show, format: :json, access_token: @token.token, id: @package
           response.status.should eq(200)
         end
@@ -91,6 +92,7 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
     describe "PUT #update" do
       context "valid parameters" do
         before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
+        before(:each) { @ownership = FactoryGirl.create(:ownership) }
         it "updates the package" do
           put :update, format: :json, access_token: @token.token, id: @package, package: FactoryGirl.attributes_for(:package, name: "rails1")
           @package.reload
@@ -105,6 +107,7 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
 
       context "invalid parameters" do
         before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
+        before(:each) { @ownership = FactoryGirl.create(:ownership) }
         it "does not update the package" do
           put :update, format: :json, access_token: @token.token, id: @package, package: FactoryGirl.attributes_for(:package, name: nil)
           @package.name.should eq("rails")
@@ -120,6 +123,7 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
     describe "DELETE #destroy" do
       context "valid parameters" do
         before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
+        before(:each) { @ownership = FactoryGirl.create(:ownership) }
         it "deletes the package" do
           expect {
             delete :destroy, format: :json, access_token: @token.token, id: @package

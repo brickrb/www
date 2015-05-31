@@ -5,7 +5,7 @@ RSpec.describe Package, type: :model do
     FactoryGirl.build(:package).should be_valid
   end
 
-  it { should have_many(:ownerships) }
+  it { should have_many(:users) }
 
   it "invalid without a name" do
     FactoryGirl.build(:package, name: nil).should_not be_valid
