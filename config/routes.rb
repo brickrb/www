@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
-  use_doorkeeper
   # WEB:
   root to: 'pages#home'
   devise_for :users
+  use_doorkeeper do
+    controllers :applications => 'oauth/applications'
+  end
 
   # API:
   namespace :api, path: "", :constraints => {:subdomain => "api"}, defaults: {format: 'json'} do
