@@ -1,5 +1,6 @@
 class Api::V0::PackagesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
+  before_filter :doorkeeper_authorize!
   respond_to :json
 
   def index
