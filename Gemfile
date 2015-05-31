@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'doorkeeper'
+gem 'paperclip'
 
 # Environment Dependencies
 group :development, :test do
