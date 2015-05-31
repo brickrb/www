@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get "/packages" => "packages#index"
       post "/packages" => "packages#create"
       get "/packages/:name" => "packages#show"
+      put "/packages/:id" => "packages#update"
     end
   end
 

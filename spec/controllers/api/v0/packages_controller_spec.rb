@@ -26,7 +26,6 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
 
     context "invalid parameters" do
       before(:each) { FactoryGirl.create(:package, name: "rails") }
-
       it "does not creates a new package" do
         expect {
           post :create, format: :json, package: FactoryGirl.attributes_for(:package, name: "rails")
@@ -53,6 +52,35 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
       it "returns http 404" do
         get :show, format: :json, name: "test"
         response.status.should eq(404)
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    context "valid parameters" do
+      before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
+      it "updates the package" do
+        put :update, format: :json, id: @package, package: FactoryGirl.attributes_for(:package, name: "rails1")
+        @package.reload
+        @package.name.should eq("rails1")
+      end
+
+      it "returns http 200" do
+        put :update, format: :json, id: @package, package: FactoryGirl.attributes_for(:package, name: "rails1")
+        response.status.should eq(200)
+      end
+    end
+
+    context "invalid parameters" do
+      before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
+      it "does not update the package" do
+        put :update, format: :json, id: @package, package: FactoryGirl.attributes_for(:package, name: nil)
+        @package.name.should eq("rails")
+      end
+
+      it "returns http 422" do
+        put :update, format: :json, id: @package, package: FactoryGirl.attributes_for(:package, name: nil)
+        response.status.should eq(422)
       end
     end
   end

@@ -25,6 +25,15 @@ class Api::V0::PackagesController < ApplicationController
     end
   end
 
+  def update
+    @package = Package.find_by_id(params[:id])
+    if @package.update(package_params)
+      render json: @package, status: 200
+    else
+      render json: { "error": "Package could not be updated." }, status: 422
+    end
+  end
+
   private
     def package_params
       params.require(:package).permit(:name)
