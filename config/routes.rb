@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post "/packages" => "packages#create"
       get "/packages/:name" => "packages#show"
       put "/packages/:id" => "packages#update"
+      delete "/packages/:id" => "packages#destroy"
     end
   end
 

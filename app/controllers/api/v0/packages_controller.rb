@@ -34,6 +34,15 @@ class Api::V0::PackagesController < ApplicationController
     end
   end
 
+  def destroy
+    @package = Package.find_by_id(params[:id])
+    if @package.destroy
+      render json: {}, status: 204
+    else
+      render json: { "error": "Package could not be deleted." }, status: 422
+    end
+  end
+
   private
     def package_params
       params.require(:package).permit(:name)
