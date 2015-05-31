@@ -42,15 +42,15 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
   describe "GET #show" do
     context "valid package" do
       it "returns http 200" do
-        package = FactoryGirl.create(:package, name: "rails")
-        get :show, format: :json, name: "rails"
+        @package = FactoryGirl.create(:package, name: "rails")
+        get :show, format: :json, id: @package
         response.status.should eq(200)
       end
     end
 
     context "invalid package" do
       it "returns http 404" do
-        get :show, format: :json, name: "test"
+        get :show, format: :json, id: "80"
         response.status.should eq(404)
       end
     end

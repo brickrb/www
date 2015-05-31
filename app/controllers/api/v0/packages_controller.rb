@@ -17,7 +17,7 @@ class Api::V0::PackagesController < ApplicationController
   end
 
   def show
-    @package = Package.find_by_name(params[:name])
+    @package = Package.find_by_id(params[:id])
     if @package
       render json: @package
     else
