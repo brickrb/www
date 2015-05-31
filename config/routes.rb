@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper
   # WEB:
   root to: 'pages#home'
   devise_for :users

@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 # Brick Dependencies
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'doorkeeper'
 
 # Environment Dependencies
 group :development, :test do
