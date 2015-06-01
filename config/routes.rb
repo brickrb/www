@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   # WEB:
   root to: 'pages#home'
+  get "/package/:name" => "packages#show", as: :package
+
   devise_for :users
   use_doorkeeper do
     controllers :applications => 'oauth/applications'
