@@ -30,7 +30,12 @@ FactoryGirl.define do
 
   factory :user do
     email { Faker::Internet.email }
+    #full_name { Faker::Name.full_name }
+    github_username { Faker::Internet.user_name }
     password "foobarfoobar"
     password_confirmation "foobarfoobar"
+    twitter_username { Faker::Internet.user_name }
+    username { Faker::Internet.user_name }
+    website { Faker::Internet.url }
   end
 end

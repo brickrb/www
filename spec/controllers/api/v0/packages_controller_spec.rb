@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V0::PackagesController, type: :controller do
 
-  let!(:user) { create(:user) }
+  let!(:user) { FactoryGirl.create(:user) }
   before { controller.stub(:current_user).and_return user }
 
   context "no access token" do
