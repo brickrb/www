@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # WEB:
   root to: 'pages#home'
   get "/package/:name" => "packages#show", as: :package
+  get "/~:username" => "users#show", as: :user
 
   devise_for :users
   use_doorkeeper do
