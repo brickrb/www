@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602114828) do
+ActiveRecord::Schema.define(version: 20150602115420) do
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -96,6 +96,9 @@ ActiveRecord::Schema.define(version: 20150602114828) do
     t.string   "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "package_id"
   end
+
+  add_index "versions", ["package_id"], name: "index_versions_on_package_id"
 
 end
