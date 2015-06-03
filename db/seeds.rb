@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Package.create(name: "rails")
+Package.create(name: "activerecord")
+Version.create(number: "1.0.0", package_id: "1")
