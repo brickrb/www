@@ -1,6 +1,7 @@
 FactoryGirl.define do
 
   factory :package do
+    license "MIT"
     name { Faker::Name.first_name }
   end
 

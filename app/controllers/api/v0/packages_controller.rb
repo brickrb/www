@@ -58,6 +58,6 @@ class Api::V0::PackagesController < ApplicationController
     end
 
     def package_params
-      params.require(:package).permit(:name)
+      params.require(:package).permit(:name, :license)
     end
 end
