@@ -6,4 +6,9 @@ RSpec.describe Version, type: :model do
   end
 
   it { should belong_to(:package) }
+
+  it { should have_attached_file(:tarball) }
+  it { should validate_attachment_content_type(:tarball).
+    allowing('tgz').
+    rejecting('text/plain', 'text/xml') }
 end
