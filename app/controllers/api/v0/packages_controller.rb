@@ -1,6 +1,6 @@
 class Api::V0::PackagesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
-#  before_filter :doorkeeper_authorize!
+  before_filter :doorkeeper_authorize!
   before_action :set_package, only: [:show, :update, :destroy]
   before_action :valid_ownership, only: [:update, :destroy]
   respond_to :json
