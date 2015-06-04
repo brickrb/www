@@ -7,14 +7,13 @@ class Api::V0::PackagesController < ApplicationController
 
   def index
     @packages = Package.all
-    render json: @packages
   end
 
   def create
     @package = Package.new(package_params)
     @ownership = Ownership.new(package_id: @package.id, user_id: current_user.id)
     if @package.save
-      render json: @package, status: 201
+      render :show, location: @package , status: 201
     else
       render json: { "error": "Package could not be saved." }, status: 422
     end
@@ -22,7 +21,6 @@ class Api::V0::PackagesController < ApplicationController
 
   def show
     if @package
-      render json: @package
     else
       render json: { "error": "Package could not be found." }, status: 404
     end
@@ -30,7 +28,7 @@ class Api::V0::PackagesController < ApplicationController
 
   def update
     if @package.update(package_params)
-      render json: @package, status: 200
+      render :show, location: @package , status: 200
     else
       render json: { "error": "Package could not be updated." }, status: 422
     end
