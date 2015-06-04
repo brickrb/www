@@ -250,7 +250,7 @@ DEPENDENCIES
   doorkeeper
   factory_girl_rails
   faker
-  jbuilder (~> 2.0)
+  jbuilder
   jquery-rails
   paperclip
   pg
