@@ -5,4 +5,12 @@ class Package < ActiveRecord::Base
 
   validates_presence_of :name, :license
   validates_uniqueness_of :name
+
+  def latest_version
+    if self.versions.any?
+      self.versions.last.number
+    else
+      "null"
+    end
+  end
 end
