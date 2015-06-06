@@ -9,3 +9,5 @@
 Package.create(name: "rails")
 Package.create(name: "activerecord")
 Version.create(number: "1.0.0", package_id: "1")
+@user = User.create(email: "test@test.com", password: "test1234", password_confirmation: "test1234")
+Ownership.create(package_id: "1", user_id: @user.id)
