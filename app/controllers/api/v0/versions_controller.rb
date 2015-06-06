@@ -3,6 +3,9 @@ class Api::V0::VersionsController < ApplicationController
   before_filter :doorkeeper_authorize!
   respond_to :json
 
+  def create
+  end
+
   private
 
     def version_params
