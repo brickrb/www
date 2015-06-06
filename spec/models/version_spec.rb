@@ -9,6 +9,6 @@ RSpec.describe Version, type: :model do
 
   it { should have_attached_file(:tarball) }
   it { should validate_attachment_content_type(:tarball).
-    allowing('tgz').
+    allowing('application/x-gzip').
     rejecting('text/plain', 'text/xml') }
 end

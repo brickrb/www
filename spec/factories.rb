@@ -43,5 +43,6 @@ FactoryGirl.define do
   factory :version do
     number { Faker::Number.digit }
     package_id "1"
+    tarball { File.open("#{Rails.root}/spec/fixtures/files/banana-lib.tgz") }
   end
 end

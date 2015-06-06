@@ -6,7 +6,7 @@ class Api::V0::VersionsController < ApplicationController
   def create
     @version = Version.new(version_params)
     if @version.save
-      render json: {}, status: 200
+      render json: {}, status: 201
     else
       render json: { "error": "Version could not be saved." }, status: 422
     end
