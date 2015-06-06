@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'doorkeeper'
 gem 'paperclip'
+gem 'delayed_job_active_record'
 
 # Environment Dependencies
 group :development, :test do
