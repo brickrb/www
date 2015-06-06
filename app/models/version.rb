@@ -3,4 +3,6 @@ class Version < ActiveRecord::Base
 
   has_attached_file :tarball
   validates_attachment :tarball, :content_type => { :content_type => "tgz" }
+
+  validates_uniqueness_of :number
 end
