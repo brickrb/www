@@ -16,6 +16,7 @@ gem 'doorkeeper'
 gem 'paperclip'
 gem 'delayed_job_active_record'
 gem 'figaro'
+gem 'twitter'
 
 # Environment Dependencies
 group :development, :test do
