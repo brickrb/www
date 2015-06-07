@@ -47,11 +47,11 @@ class Api::V0::PackagesController < ApplicationController
 
   private
     def set_package
-      @package = Package.find_by_id(params[:id])
+      @package = Package.find_by(params[:name])
     end
 
     def valid_ownership
-      @package = current_user.packages.find_by(id: params[:id])
+      @package = current_user.packages.find_by(params[:name])
       render json: { "error": "Not authorized." }, status: 401 if @package.nil?
     end
 

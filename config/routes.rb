@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     namespace :v0 do
       get "/packages" => "packages#index"
       post "/packages" => "packages#create"
-      get "/packages/:id" => "packages#show"
-      put "/packages/:id" => "packages#update"
-      delete "/packages/:id" => "packages#destroy"
+      get "/packages/:name" => "packages#show"
+      put "/packages/:name" => "packages#update"
+      delete "/packages/:name" => "packages#destroy"
 
       post "/versions" => "versions#create"
     end
