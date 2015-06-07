@@ -1,4 +1,4 @@
-json.extract! @package, :id, :name, :latest_version
+json.extract! @package, :id, :name, :description, :latest_version
 
 json.contributors @package.ownerships, :fullname, :email
 

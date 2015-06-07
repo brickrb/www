@@ -40,6 +40,7 @@ FactoryGirl.define do
   end
 
   factory :version do
+    description { Faker::Lorem.paragraph }
     license "MIT"
     number { Faker::Number.digit }
     package_id "1"

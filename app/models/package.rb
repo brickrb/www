@@ -6,6 +6,10 @@ class Package < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  def description
+    self.versions.last.description
+  end
+
   def latest_version
     if self.versions.any?
       self.versions.last.number
@@ -13,4 +17,5 @@ class Package < ActiveRecord::Base
       "null"
     end
   end
+
 end
