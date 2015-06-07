@@ -1,10 +1,5 @@
 FactoryGirl.define do
 
-  factory :package do
-    license "MIT"
-    name { Faker::Name.first_name }
-  end
-
   factory :oauth_access_token, class: "Doorkeeper::AccessToken" do
     transient do
       user nil
@@ -29,6 +24,10 @@ FactoryGirl.define do
     user_id "1"
   end
 
+  factory :package do
+    name { Faker::Name.first_name }
+  end
+
   factory :user do
     email { Faker::Internet.email }
     full_name { Faker::Name.name }
@@ -41,6 +40,7 @@ FactoryGirl.define do
   end
 
   factory :version do
+    license "MIT"
     number { Faker::Number.digit }
     package_id "1"
     tarball { File.open("#{Rails.root}/spec/fixtures/files/banana-lib.tgz") }

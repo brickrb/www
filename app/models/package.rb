@@ -3,7 +3,7 @@ class Package < ActiveRecord::Base
   has_many :users, through: :ownerships
   has_many :versions
 
-  validates_presence_of :name, :license
+  validates_presence_of :name
   validates_uniqueness_of :name
 
   def latest_version

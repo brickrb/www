@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606005412) do
+ActiveRecord::Schema.define(version: 20150607150945) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(version: 20150606005412) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "license"
   end
 
   create_table "users", force: :cascade do |t|
@@ -119,6 +118,7 @@ ActiveRecord::Schema.define(version: 20150606005412) do
     t.string   "tarball_content_type"
     t.integer  "tarball_file_size"
     t.datetime "tarball_updated_at"
+    t.string   "license"
   end
 
   add_index "versions", ["package_id"], name: "index_versions_on_package_id"

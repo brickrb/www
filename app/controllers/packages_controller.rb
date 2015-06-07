@@ -11,6 +11,6 @@ class PackagesController < ApplicationController
     end
 
     def package_params
-      params.require(:package).permit(:name, :latest_version, :license)
+      params.require(:package).permit(:name, :latest_version)
     end
 end

@@ -21,6 +21,6 @@ class Api::V0::VersionsController < ApplicationController
     end
 
     def version_params
-      params.require(:version).permit(:number, :shasum, :package_id, :tarball)
+      params.require(:version).permit(:number, :license, :shasum, :package_id, :tarball)
     end
 end

@@ -7,6 +7,10 @@ RSpec.describe Version, type: :model do
 
   it { should belong_to(:package) }
 
+  it "invalid without a license" do
+    FactoryGirl.build(:version, license: nil).should_not be_valid
+  end
+
   it { should have_attached_file(:tarball) }
   it { should validate_attachment_content_type(:tarball).
     allowing('application/x-gzip').
