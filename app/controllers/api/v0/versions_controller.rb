@@ -1,6 +1,7 @@
 class Api::V0::VersionsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   before_filter :doorkeeper_authorize!
+  before_action :valid_ownership
   respond_to :json
 
   def create
@@ -13,6 +14,11 @@ class Api::V0::VersionsController < ApplicationController
   end
 
   private
+
+    def valid_ownership
+      @package = current_user.packages.find_by(id: version_params[:package_id])
+      render json: { "error": "Not authorized." }, status: 401 if @package.nil?
+    end
 
     def version_params
       params.require(:version).permit(:number, :shasum, :package_id, :tarball)

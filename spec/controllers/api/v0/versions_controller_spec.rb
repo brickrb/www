@@ -20,9 +20,13 @@ RSpec.describe Api::V0::VersionsController, type: :controller do
 
     describe "POST #create" do
       context "valid parameters" do
+        before do
+          @package = FactoryGirl.create(:package)
+          @ownership = FactoryGirl.create(:ownership, package_id: "1", user_id: "1")
+        end
         it "creates a new version" do
           expect {
-            post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version)
+            post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version, package_id: "1")
           }.to change(Version, :count).by(1)
         end
 
@@ -32,30 +36,51 @@ RSpec.describe Api::V0::VersionsController, type: :controller do
         end
       end
 
-      context "invalid parameters" do
+      context "invalid parameters (invalid version number)" do
         before(:each) { FactoryGirl.create(:version, number: "1.0") }
         it "does not creates a new package" do
+          @package = FactoryGirl.create(:package)
+          @ownership = FactoryGirl.create(:ownership, package_id: "1", user_id: "1")
           expect {
             post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version, number: "1.0")
           }.to change(Version, :count).by(0)
         end
 
         it "returns http 422" do
+          @package = FactoryGirl.create(:package)
+          @ownership = FactoryGirl.create(:ownership, package_id: "1", user_id: "1")
           post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version, number: "1.0")
           response.status.should eq(422)
         end
       end
 
-      context "invalid parameters" do
+      context "invalid parameters (no tarball)" do
         it "does not creates a new package" do
+          @package = FactoryGirl.create(:package)
+          @ownership = FactoryGirl.create(:ownership, package_id: "1", user_id: "1")
           expect {
             post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version, tarball: nil)
           }.to change(Version, :count).by(0)
         end
 
         it "returns http 422" do
+          @package = FactoryGirl.create(:package)
+          @ownership = FactoryGirl.create(:ownership, package_id: "1", user_id: "1")
           post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version, tarball: nil)
           response.status.should eq(422)
+        end
+      end
+
+      context "invalid parameters (invalid permissions)" do
+        it "does not creates a new package" do
+          expect {
+            post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version)
+          }.to change(Version, :count).by(0)
+        end
+
+        it "returns http 401" do
+          post :create, format: :json, access_token: @token.token, version: FactoryGirl.attributes_for(:version)
+          response.status.should eq(401)
         end
       end
     end
