@@ -15,6 +15,7 @@ gem 'devise'
 gem 'doorkeeper'
 gem 'paperclip'
 gem 'delayed_job_active_record'
+gem 'figaro'
 
 # Environment Dependencies
 group :development, :test do
