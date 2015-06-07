@@ -28,5 +28,7 @@ module Brick
       Doorkeeper::AuthorizationsController.layout "application"
       Doorkeeper::AuthorizedApplicationsController.layout "application"
     end
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end
