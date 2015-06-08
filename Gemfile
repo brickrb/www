@@ -17,6 +17,7 @@ gem 'paperclip'
 gem 'delayed_job_active_record'
 gem 'figaro'
 gem 'twitter'
+gem 'puma'
 
 # Environment Dependencies
 group :development, :test do
