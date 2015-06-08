@@ -7,6 +7,7 @@ class Api::V0::VersionsController < ApplicationController
   def create
     @version = Version.new(version_params)
     if @version.save
+      VersionTweeterJob.enqueue(@version.id)
       render json: {}, status: 201
     else
       render json: { "error": "Version could not be saved." }, status: 422
