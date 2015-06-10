@@ -18,6 +18,7 @@ gem 'delayed_job_active_record'
 gem 'figaro'
 gem 'twitter'
 gem 'puma'
+gem "fastly-rails"
 
 # Environment Dependencies
 group :development, :test do
