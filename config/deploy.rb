@@ -71,7 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue "RAILS_ENV=production rails server --binding=45.55.250.126 --port=3000"
+      queue "kill -s SIGUSR2 `cat /home/deployer/brick/shared/puma.pid`"
     end
   end
 end
