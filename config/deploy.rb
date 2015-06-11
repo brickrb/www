@@ -71,7 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue! %[kill -s SIGUSR2 `cat /home/deployer/brick/shared/puma.pid`]
+      queue! %[kill -s SIGTERM `cat /home/deployer/brick/shared/puma.pid` && bundle exec puma -e production -d -b unix:///var/run/my_app.sock --pidfile /home/deployer/brick/shared/puma.pid]
     end
   end
 end
