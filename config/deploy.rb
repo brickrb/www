@@ -71,7 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue! %[kill -s SIGTERM `cat /home/deployer/brick/shared/puma.pid` && bundle exec puma -e production -d -b unix:///var/run/my_app.sock --pidfile /home/deployer/brick/shared/puma.pid]
+      queue "RAILS_ENV=production rails server --binding=45.55.250.126 --port=3000"
     end
   end
 end
