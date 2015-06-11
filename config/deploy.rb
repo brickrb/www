@@ -10,9 +10,9 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'brick.jonathanmoss.me'
+set :domain, 'root@45.55.250.126'
 set :deploy_to, '/var/www/brick.jonathanmoss.me'
-set :repository, 'git://github.com/brickrb/brick.git'
+set :repository, 'git://github.com/brickrb/www.git'
 set :branch, 'master'
 
 # For system-wide RVM install.
@@ -47,6 +47,9 @@ task :setup => :environment do
 
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+
+  queue! %[touch "#{deploy_to}/#{shared_path}/config/application.yml"]
+  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/application.yml'."]
 
   queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
