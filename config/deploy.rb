@@ -71,8 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue "sudo stop puma-manager"
-      queue "sudo start puma app=/home/deployer/brick"
+      queue "RAILS_ENV=production rails server --binding=45.55.250.126 --port=80"
     end
   end
 end
