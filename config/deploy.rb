@@ -71,7 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue "RAILS_ENV=production rails server --binding=45.55.250.126 --port=80"
+      queue "RAILS_ENV=production rails server --binding=45.55.250.126 --port=3000"
     end
   end
 end
