@@ -10,13 +10,6 @@ shared_dir = "#{app_dir}/shared"
 rails_env = ENV['RAILS_ENV'] || "production"
 environment rails_env
 
-# Set up socket location
-bind "unix:///tmp/my_app.sock"
-
-# Store the pid of the server in the file at “path”.
-
-pidfile '#{shared_dir}/pids/puma.pid'
-
 # Logging
 stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
 

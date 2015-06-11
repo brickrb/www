@@ -71,7 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue "kill -s SIGUSR2 `cat /home/deployer/brick/shared/puma.pid`"
+      queue! %[kill -s SIGUSR2 `cat /home/deployer/brick/shared/puma.pid`]
     end
   end
 end
