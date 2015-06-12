@@ -63,6 +63,6 @@ class Api::V0::PackagesController < ApplicationController
     end
 
     def package_params
-      params.require(:package).permit(:name, :latest_version)
+      params.require(:package).permit(:name, :latest_version_number)
     end
 end
