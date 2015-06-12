@@ -5,9 +5,8 @@ class Api::V0::VersionsController < ApplicationController
   respond_to :json
 
   def create
-    @version = Version.new(version_params)
+    @version = Version.new(version_params.merge(package_id: @package))
     if @version.save
-      @package = @version.package
       @package.purge
       @package.purge_all
       VersionTweeterJob.enqueue(@version.id)
@@ -20,11 +19,11 @@ class Api::V0::VersionsController < ApplicationController
   private
 
     def valid_ownership
-      @package = current_user.packages.find_by(id: version_params[:package_id])
+      @package = current_user.packages.find_by(name: params[:name])
       render json: { "error": "Not authorized." }, status: 401 if @package.nil?
     end
 
     def version_params
-      params.require(:version).permit(:description, :number, :license, :shasum, :package_id, :tarball)
+      params.require(:version).permit(:description, :number, :license, :package_id, :shasum, :tarball)
     end
 end
