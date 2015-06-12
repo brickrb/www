@@ -7,6 +7,9 @@ class Api::V0::VersionsController < ApplicationController
   def create
     @version = Version.new(version_params)
     if @version.save
+      @package = @version.package
+      @package.purge
+      @package.purge_all
       VersionTweeterJob.enqueue(@version.id)
       render json: {}, status: 201
     else
