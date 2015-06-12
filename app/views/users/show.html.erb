@@ -18,10 +18,14 @@
 
     <h3><b> <%= @user.full_name %> </b></h3>
     <hr>
-    <h3><b> <%= link_to "#{@user.website}", "http://#{@user.website}" %> </b></h3>
-    <hr>
-    <h3><b> <%= link_to "#{@user.github_username} on GitHub", "https://github.com/#{@user.github_username}" %> </b></h3>
-    <hr>
-    <h3><b> <%= link_to "#{@user.username} on brick", "http://localhost:3000/~#{@user.username}" %> </b></h3>
+    
+    <% if @user.website %>
+      <h3><b> <%= link_to "#{@user.website}", "http://#{@user.website}" %> </b></h3>
+      <hr>
+    <% elsif @user.github_username %>
+      <h3><b> <%= link_to "#{@user.github_username} on GitHub", "https://github.com/#{@user.github_username}" %> </b></h3>
+      <hr>
+    <% end %>
+    <h3><b> <%= link_to "#{@user.username} on brick", "http://#{ENV["SITE_URL"]}/~#{@user.username}" %> </b></h3>
   </div>
 </div>

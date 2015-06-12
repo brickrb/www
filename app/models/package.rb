@@ -12,6 +12,12 @@ class Package < ActiveRecord::Base
 
   def latest_version
     if self.versions.any?
+      self.versions.last
+    end
+  end
+
+  def latest_version_number
+    if self.versions.any?
       self.versions.last.number
     else
       "null"
