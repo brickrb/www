@@ -18,11 +18,12 @@
 
     <h3><b> <%= @user.full_name %> </b></h3>
     <hr>
-    
+
     <% if @user.website %>
       <h3><b> <%= link_to "#{@user.website}", "http://#{@user.website}" %> </b></h3>
       <hr>
-    <% elsif @user.github_username %>
+    <% end %>
+    <% if @user.github_username %>
       <h3><b> <%= link_to "#{@user.github_username} on GitHub", "https://github.com/#{@user.github_username}" %> </b></h3>
       <hr>
     <% end %>
