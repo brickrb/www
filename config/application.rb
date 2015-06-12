@@ -31,9 +31,11 @@ module Brick
 
     config.active_job.queue_adapter = :delayed_job
 
-    config.middleware.insert_before(
-      Warden::Manager,
-      "FastlyRails::Rack::RemoveSetCookieHeader"
-    )
+    config.middleware.delete "Warden::Manager"
+
+    #config.middleware.insert_before(
+    #  Warden::Manager,
+    #  "FastlyRails::Rack::RemoveSetCookieHeader"
+    #)
   end
 end
