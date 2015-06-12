@@ -75,7 +75,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue! %[kill -s SIGUSR2 `cat #{deploy_to}/#{shared_path}/puma.pid`]
+      queue! %[kill -s SIGUSR2 `"cat #{deploy_to}/#{shared_path}/puma.pid"`]
       queue  %[echo "-----> Puma has been restarted."]
     end
   end
