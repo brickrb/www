@@ -1,7 +1,7 @@
 class Package < ActiveRecord::Base
-  has_many :ownerships
+  has_many :ownerships, dependent: :destroy
   has_many :users, through: :ownerships
-  has_many :versions
+  has_many :versions, dependent: :destroy
 
   validates_presence_of :name
   validates_uniqueness_of :name

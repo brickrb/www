@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
-  has_many :ownerships
+  has_many :ownerships, dependent: :destroy
   has_many :packages, through: :ownerships
-  
+
   if Rails.env.production?
     after_create :purge_all
     after_save :purge
