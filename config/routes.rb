@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       delete "/packages/:name" => "packages#destroy"
 
       post "/packages/:name/versions" => "versions#create"
+      delete "/packages/:name/versions/:number" => "versions#destroy"
     end
   end
 

@@ -6,9 +6,16 @@ RSpec.describe Api::V0::VersionsController, type: :controller do
   before { controller.stub(:current_user).and_return user }
 
   context "no access token" do
-    it 'returns a 401 when users are not authenticated' do
+    before(:each) do
       @package = FactoryGirl.create(:package)
+      @version = FactoryGirl.create(:version, package_id: @package.id)
+    end
+    it 'returns a 401 when users are not authenticated' do
       post :create, format: :json, name: @package.name, version: FactoryGirl.attributes_for(:version)
+      response.status.should eq(401)
+    end
+    it 'returns a 401 when users are not authenticated' do
+      delete :destroy, format: :json, name: @package.name, number: @version.number
       response.status.should eq(401)
     end
   end
@@ -84,6 +91,24 @@ RSpec.describe Api::V0::VersionsController, type: :controller do
           @package = FactoryGirl.create(:package)
           post :create, format: :json, access_token: @token.token, name: @package.name, version: FactoryGirl.attributes_for(:version)
           response.status.should eq(401)
+        end
+      end
+    end
+
+    describe "DELETE #destroy" do
+      context "valid parameters" do
+        before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
+        before(:each) { @ownership = FactoryGirl.create(:ownership) }
+        before(:each) { @version = FactoryGirl.create(:version) }
+        it "deletes the version" do
+          expect {
+            delete :destroy, format: :json, access_token: @token.token, name: @package.name, number: @version.number
+          }.to change(Version, :count).by(-1)
+        end
+
+        it "returns http 204" do
+          delete :destroy, format: :json, access_token: @token.token, name: @package.name, number: @version.number
+          response.status.should eq(204)
         end
       end
     end
