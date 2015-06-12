@@ -43,7 +43,11 @@ end
 # all releases.
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/log/puma.stderr.log"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/log/puma.stdout.log"]
+
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/pids"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/pids/puma.state"]
 
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
@@ -71,6 +75,8 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
+      queue! %[kill -s SIGUSR2 `cat #{deploy_to}/#{shared_path}/puma.pid`]
+      queue  %[echo "-----> Puma has been restarted."]
     end
   end
 end
