@@ -76,7 +76,7 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
         it "returns http 200" do
           @package = FactoryGirl.create(:package, name: "rails")
           @ownership = FactoryGirl.create(:ownership)
-          get :show, format: :json, access_token: @token.token, name: @package
+          get :show, format: :json, access_token: @token.token, name: @package.name
           response.status.should eq(200)
         end
       end
@@ -94,13 +94,13 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
         before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
         before(:each) { @ownership = FactoryGirl.create(:ownership) }
         it "updates the package" do
-          put :update, format: :json, access_token: @token.token, name: @package, package: FactoryGirl.attributes_for(:package, name: "rails1")
+          put :update, format: :json, access_token: @token.token, name: @package.name, package: FactoryGirl.attributes_for(:package, name: "rails1")
           @package.reload
           @package.name.should eq("rails1")
         end
 
         it "returns http 200" do
-          put :update, format: :json, access_token: @token.token, name: @package, package: FactoryGirl.attributes_for(:package, name: "rails1")
+          put :update, format: :json, access_token: @token.token, name: @package.name, package: FactoryGirl.attributes_for(:package, name: "rails1")
           response.status.should eq(200)
         end
       end
@@ -109,12 +109,12 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
         before(:each) { @package = FactoryGirl.create(:package, name: "rails") }
         before(:each) { @ownership = FactoryGirl.create(:ownership) }
         it "does not update the package" do
-          put :update, format: :json, access_token: @token.token, name: @package, package: FactoryGirl.attributes_for(:package, name: nil)
+          put :update, format: :json, access_token: @token.token, name: @package.name, package: FactoryGirl.attributes_for(:package, name: nil)
           @package.name.should eq("rails")
         end
 
         it "returns http 422" do
-          put :update, format: :json, access_token: @token.token, name: @package, package: FactoryGirl.attributes_for(:package, name: nil)
+          put :update, format: :json, access_token: @token.token, name: @package.name, package: FactoryGirl.attributes_for(:package, name: nil)
           response.status.should eq(422)
         end
       end
@@ -126,12 +126,12 @@ RSpec.describe Api::V0::PackagesController, type: :controller do
         before(:each) { @ownership = FactoryGirl.create(:ownership) }
         it "deletes the package" do
           expect {
-            delete :destroy, format: :json, access_token: @token.token, name: @package
+            delete :destroy, format: :json, access_token: @token.token, name: @package.name
           }.to change(Package, :count).by(-1)
         end
 
         it "returns http 204" do
-          delete :destroy, format: :json, access_token: @token.token, name: @package
+          delete :destroy, format: :json, access_token: @token.token, name: @package.name
           response.status.should eq(204)
         end
       end

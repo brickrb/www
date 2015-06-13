@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-md-9">
     <h1> <%= @package.name %> </h1>
-    <p> <%= @package.latest_version.description %> </p>
+    <% if @package.latest_version %>
+      <p> <%= @package.latest_version.description %> </p>
+    <% end %>
   </div>
 
   <div class="col-md-3">
@@ -20,7 +22,9 @@
       <hr>
       <p><a href="https://github.com/rails/rails">github.com/rails/rails</a></p>
       <hr>
-      <p><b> <%= @package.latest_version.license %> </b> license</p>
+      <% if @package.latest_version %>
+        <p><b> <%= @package.latest_version.license %> </b> license</p>
+      <% end %>
     </div>
     <br>
 

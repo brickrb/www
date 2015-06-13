@@ -13,8 +13,8 @@ class Api::V0::PackagesController < ApplicationController
 
   def create
     @package = Package.new(package_params)
-    @ownership = Ownership.new(package_id: @package.id, user_id: current_user.id)
-    if @package.save
+    @ownership = Ownership.new(package_id: @package, user_id: current_user)
+    if @package.save && @ownership.save
       @package.purge_all
       render :show, location: @package , status: 201
     else
@@ -54,11 +54,11 @@ class Api::V0::PackagesController < ApplicationController
 
   private
     def set_package
-      @package = Package.find_by(params[:name])
+      @package = Package.find_by(name: params[:name])
     end
 
     def valid_ownership
-      @package = current_user.packages.find_by(params[:name])
+      @package = current_user.packages.find_by(name: params[:name])
       render json: { "error": "Not authorized." }, status: 401 if @package.nil?
     end
 

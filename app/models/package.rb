@@ -7,7 +7,11 @@ class Package < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def description
-    self.versions.last.description
+    if self.versions.any?
+      self.versions.last.description
+    else
+      "null"
+    end
   end
 
   def latest_version

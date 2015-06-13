@@ -2,11 +2,11 @@ class Api::V0::VersionsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   before_filter :doorkeeper_authorize!
   before_action :valid_ownership
-  before_action :set_version
+  before_action :set_version, only: :destroy
   respond_to :json
 
   def create
-    @version = Version.new(version_params.merge(package_id: @package))
+    @version = Version.new(version_params)
     if @version.save
       @package.purge
       @package.purge_all
@@ -30,12 +30,12 @@ class Api::V0::VersionsController < ApplicationController
   private
 
     def valid_ownership
-      @package = current_user.packages.find_by(name: params[:name])
+      @package = current_user.packages.find_by(name: params[:package_name])
       render json: { "error": "Not authorized." }, status: 401 if @package.nil?
     end
 
     def set_version
-      @version = Version.find_by(number: params[:number], package_id: @package)
+      @version = Version.find_by(number: params[:version_number])
     end
 
     def version_params
