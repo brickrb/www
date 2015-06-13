@@ -1,4 +1,5 @@
 class Version < ActiveRecord::Base
+  has_many :dependencies
   belongs_to :package
 
   has_attached_file :tarball

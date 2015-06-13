@@ -3,6 +3,7 @@ FactoryGirl.define do
   factory :dependency do
     name { Faker::Name.first_name.downcase }
     version_constraint { Faker::Number.digit }
+    version_id "1"
   end
 
   factory :oauth_access_token, class: "Doorkeeper::AccessToken" do
