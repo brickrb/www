@@ -1,5 +1,10 @@
 FactoryGirl.define do
 
+  factory :dependency do
+    name { Faker::Name.first_name.downcase }
+    version_constraint { Faker::Number.digit }
+  end
+
   factory :oauth_access_token, class: "Doorkeeper::AccessToken" do
     transient do
       user nil

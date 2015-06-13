@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607165727) do
+ActiveRecord::Schema.define(version: 20150613000151) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20150607165727) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "dependencies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "version_constraint"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
